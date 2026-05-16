@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+ 
+    stages {
+ 
+        stage('Clone Code') {
+            steps {
+                echo 'Cloning GitHub Repository'
+                git 'YOUR_GITHUB_REPO_URL'
+            }
+        }
+ 
+        stage('Build') {
+            steps {
+                echo 'Running Employee Management Application'
+ 
+                sh '''
+                python3 app.py
+                '''
+            }
+        }
+ 
+        stage('Test') {
+            steps {
+                echo 'Running Automated Tests'
+ 
+                sh '''
+                pip install -r requirements.txt
+                pytest
+                '''
+            }
+        }
+ 
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Application'
+ 
+                sh '''
+                echo "Application deployed successfully"
+                '''
+            }
+        }
+    }
+ 
+    post {
+ 
+        success {
+            echo 'CI/CD Pipeline Executed Successfully'
+        }
+ 
+        failure {
+            echo 'Pipeline Failed'
+        }
+    }
+}
+ 
