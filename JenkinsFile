@@ -4,11 +4,12 @@ pipeline {
     stages {
  
         stage('Clone Code') {
-            steps {
-                echo 'Cloning GitHub Repository'
-                git 'https://github.com/kollivenkatesh9-eng/Devops-demo-app.git'
-            }
-        }
+    steps {
+        echo 'Cloning GitHub Repository'
+        git branch: 'main', url: 'https://github.com/kollivenkatesh9-eng/Devops-demo-app.git'
+    }
+}
+
  
         stage('Build') {
             steps {
