@@ -6,7 +6,7 @@ pipeline {
         stage('Clone Code') {
             steps {
                 echo 'Cloning GitHub Repository'
-                git 'https://github.com/kollivenkatesh9-eng/Devops-demo-app.git'
+                git 'https://github.com/kollivenkatesh9-eng/Devops-demo-app.git', branch: 'main'
             }
         }
  
