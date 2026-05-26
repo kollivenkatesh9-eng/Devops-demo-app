@@ -1,51 +1,48 @@
 pipeline {
     agent any
- 
-    stages {
- 
-        stage('Clone Code') {
-    steps {
-        echo 'Cloning GitHub Repository'
-        git branch: 'main', url: 'https://github.com/kollivenkatesh9-eng/Devops-demo-app.git'
-    }
-}
 
- 
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Clone Code') {
+            steps {
+                echo 'Cloning GitHub Repository'
+                git branch: 'main', url: 'https://github.com/kollivenkatesh9-eng/Devops-demo-app.git'
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Running Employee Management Application'
- 
-                sh '''
-                python3 app.py
-                '''
+                // Replace with your actual build command
+                bat 'python app.py'
             }
         }
- 
+
         stage('Test') {
             steps {
-                echo 'Running Automated Tests'
- 
-                sh '''
-                pip install -r requirements.txt
-                pytest
-                '''
+                echo 'Running Tests'
+                // Replace with your test command
+                bat 'pytest tests/'
             }
         }
- 
+
         stage('Deploy') {
             steps {
                 echo 'Deploying Application'
- 
-                sh '''
-                echo "Application deployed successfully"
-                '''
+                // Replace with your deploy command
+                bat 'echo Deploy step goes here'
             }
         }
     }
- 
+
     post {
         success {
-            echo 'CI/CD Pipeline Executed Successfully'
+            echo 'Pipeline Succeeded'
         }
         failure {
             echo 'Pipeline Failed'
